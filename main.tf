@@ -26,14 +26,9 @@ module "vpc-host" {
 module "vpc"  {
     source  = "terraform-google-modules/network/google"
     version = "~> 7.2"
-
- 
-
     project_id   = var.project_id 
     network_name = var.network_name
     routing_mode = "GLOBAL"
-
- 
 
     subnets = [
         {
@@ -61,7 +56,6 @@ module "vpc"  {
 
 }
 
-
 module "firewall_rules" {
   source       = "terraform-google-modules/network/google//modules/firewall-rules"
   depends_on = [module.vpc]
@@ -84,7 +78,6 @@ module "firewall_rules" {
       log_config              = r.log_config
   }]
 }
-
 
 module "subnet-iam-bindings" {
   source = "terraform-google-modules/iam/google//modules/subnets_iam"
